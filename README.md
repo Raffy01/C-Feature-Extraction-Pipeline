@@ -101,38 +101,42 @@ Execute following sequance
 
 When `extract_file.sh` runs on a C source file `<base>.c`, it generates these features (columns) in the CSV, in order:
 
-1. `FILE` – Basename of the C file (e.g., `example.c`).
-2. `f1` – Count of semicolon‐terminated statements in GIMPLE (rough measure of statement count).
-3. `f2` – Count of assignments or comparisons (`=` with arithmetic; or `cmp`) in GIMPLE.
-4. `f3` – Count of memory operations (`mem`) in the RTL‐expand dump.
-5. `f4` – Number of basic blocks in the CFG (`<bb N>` markers).
-6. `f5` – Count of control‐flow statements (`if (` or `switch`) in GIMPLE.
-7. `f6` – Cyclomatic complexity estimate: `E – N + 2P`, where:
-    - `E` = number of edges (`->`) in the CFG DOT file  
-    - `N` = number of labels in the DOT file  
-    - `P` = number of subgraph clusters (each `cluster_…`)  
-8. `f7` – Sum of all loop counts reported in the CFG dump (`“loops found”` lines).
-9. `f8` – Maximum loop‐nesting depth (parsed from lines containing `depth N, outer M` in the CFG dump).
-10. `f9` – Count of function calls (`call `) in the RTL‐expand dump.
-11. `f10` – Ratio of external library calls to all calls (computed by comparing calls in GIMPLE vs. defined functions).
-12. `f11` – Output of `./f11.bin <base>.fdump.cfg.dot` (user‐provided helper; typically a custom metric).
-13. `f12` – Average in‐degree + out‐degree in the CFG graph (computed over the DOT file).
-14. `f13` – Sum of all “Partition <size>” values in the RTL‐expand dump (e.g., stack‐frame sizes).
+|ID |Feature Name   |Description (Source / Logic)                                        |
+|---|---------------|--------------------------------------------------------------------|
+|**f1** |**Statement Count**|Count of semicolon-terminated statements in **GIMPLE**.                 |
+|**f2** |**Logic Ops**      |Count of assignments or comparisons (`=` or `cmp`) in **GIMPLE**.           |
+|**f3** |**Memory Ops**     |Count of memory operations (`mem`) in **RTL-expand** dump.                |
+|**f4** |**Basic Blocks**   |Number of basic blocks in the **Control Flow Graph (CFG)**.             |
+|**f5** |**Control Flow**   |Count of `if` or `switch` statements in **GIMPLE**.                         |
+|**f6** |**Complexity**     |Cyclomatic complexity estimate (`E−N+2P`) from the **DOT** file.          |
+|**f7** |**Loop Count**     |Total number of loops found in the **CFG** dump.                        |
+|**f8** |**Max Nesting**   |Maximum loop-nesting depth parsed from the **CFG** dump.                |
+|**f9** |**Function Calls** |Total count of function calls (`call`) in the **RTL-expand** dump.        |
+|**f10**|**Lib Call Ratio** |Ratio of external library calls to total calls (GIMPLE vs. defined).|
+|**f11**|**Custom Metric**  |Output of `f11.bin` (calculated from the **CFG DOT** file).               |
+|**f12**|**Graph Degree**   |Average in-degree + out-degree across the **CFG** graph.                |
+|**f13**|**Stack Size**     |Sum of all "Partition" values (stack-frame sizes) in **RTL-expand**.    |
+
 15. `f14` – Execution time (in `task‐clock` units) measured by `perf stat`, with a 1-second timeout.  
     − If compilation or runtime fails, `f14 = -1`.
-16. `F15` – Dynamic count of **instructions** (from `perf stat –e instructions`).  
-17. `F16` – Dynamic count of **branch-instructions**.  
-18. `F17` – Dynamic count of **branch-misses**.  
-19. `F18` – Dynamic count of **cache-references**.  
-20. `F19` – Dynamic count of **cache-misses**.  
-21. `F20` – Dynamic count of **mem-loads**.  
-22. `F21` – Dynamic count of **mem-stores**.  
-23. `F22` – Dynamic count of **dtlb_load_misses.walk_completed**.  
-24. `F23` – Total number of **read**‐family syscalls (read, readv, pread64, preadv) as traced by `strace`.  
-25. `F24` – Total number of **write**‐family syscalls (write, writev, pwrite64, pwritev) as traced by `strace`.  
-26. `F25` – Count of **page-faults** (from `perf stat`).  
-27. `F26` – Count of **minor-faults**.  
-28. `F27` – Count of **major-faults**.
+    
+|ID |Feature Name   |Description (Tool / Metric)                                         |
+|---|---------------|--------------------------------------------------------------------|
+|**f14**|**Execution Time** |Total execution time in `task-clock` units (via `perf stat`).           |
+|**F15**|**Instructions**   |Dynamic count of retired instructions.                              |
+|**F16**|**Branches**       |Dynamic count of branch instructions.                               |
+|**F17**|**Branch Misses**  |Count of mispredicted branches.                                     |
+|**F18**|**Cache Refs**     |Total dynamic cache references.                                     |
+|**F19**|**Cache Misses**   |Total dynamic cache misses.                                         |
+|**F20**|**Mem Loads**      |Dynamic count of memory load operations.                            |
+|**F21**|**Mem Stores**     |Dynamic count of memory store operations.                           |
+|**F22**|**dTLB Misses**    |Data TLB load misses (walk completed).                              |
+|**F23**|**Read Syscalls**  |Total `read`-family system calls (read, readv, etc.) via `strace`.      |
+|**F24**|**Write Syscalls** |Total `write`-family system calls (write, writev, etc.) via `strace`.   |
+|**F25**|**Page Faults**    |Total count of page faults.                                         |
+|**F26**|**Minor Faults**   |Dynamic count of minor page faults.                                 |
+|**F27**|**Major Faults**   |Dynamic count of major page faults.                                 |
+
 
 The final CSV header (first line) is **not** generated automatically; if you want a header, create it as:
 ```csv
