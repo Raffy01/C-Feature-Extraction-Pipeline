@@ -364,7 +364,8 @@ To process multiple “pXXXX” subdirectories in parallel, use:
 ## License
 
 This Dataset is released under the CDLA 2.0 License. See [LICENSE](https://cdla.dev/permissive-2-0/) for details.  
-Other codes are written by Wooyong Eom, CSE, Soongsil Univ.
+This source code is licensed under the **MIT License**. See the `LICENSE` file for details.  
+
 ---
 
-_Last Updated: June 6, 2025_
+_Last Updated: March 13, 2026_
