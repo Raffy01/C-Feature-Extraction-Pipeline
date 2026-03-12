@@ -1,5 +1,11 @@
 # C Feature Extraction Pipeline
 
+![Bash](https://img.shields.io/badge/bash-%234EAA25.svg?style=for-the-badge&logo=gnu-bash&logoColor=white)
+![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
+![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)
+![C](https://img.shields.io/badge/c-%2300599C.svg?style=for-the-badge&logo=c&logoColor=white)
+![GCC](https://img.shields.io/badge/GCC-FFD21F?style=for-the-badge&logo=gcc&logoColor=black)
+
 This repository provides a set of Bash scripts to automate static and dynamic feature extraction from C source files, aggregate the results into a CSV file, and (optionally) run the extraction in parallel across multiple directories. It is designed for projects that require per‐source‐file feature collection (e.g., performance modeling, code analytics, machine learning).
 
 ---
