@@ -116,7 +116,6 @@ When `extract_file.sh` runs on a C source file `<base>.c`, it generates these fe
 |**f11**|**Custom Metric**  |Output of `f11.bin` (calculated from the **CFG DOT** file).               |
 |**f12**|**Graph Degree**   |Average in-degree + out-degree across the **CFG** graph.                |
 |**f13**|**Stack Size**     |Sum of all "Partition" values (stack-frame sizes) in **RTL-expand**.    |
-|**f14**|**Execution time** |Execution time measured by `perf stat`, with a 1-second timeout.  
 |**f14**|**Execution Time** |Total execution time in `task-clock` units (via `perf stat`).           |
 |**F15**|**Instructions**   |Dynamic count of retired instructions.                              |
 |**F16**|**Branches**       |Dynamic count of branch instructions.                               |
